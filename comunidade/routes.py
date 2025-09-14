@@ -1,6 +1,7 @@
 from flask import render_template, request, flash, redirect, url_for
-from comunidade import app
+from comunidade import app, database
 from comunidade.forms import FormLogin, FormCriarConta
+from comunidade.models import Usuario
 
 
 # Rota da página inicial
@@ -33,6 +34,10 @@ def login():
         return redirect(url_for('home'))
     # Valida se o usuário criou a conta     # Valida se estamos clicando no botão certo
     if form_criarconta.validate_on_submit() and 'botao_submit_login' in request.form:
+        # Criar um usuário 
+        usuario = Usuario(username= form_criarconta.username.data, email=form_criarconta.email.data, senha=form_criarconta.senha.data)
+        database.session.add(usuario)
+        database.session.commit()
         # Exibindo mensagem de bem sucedido         # Pegando o e-mail do usuário
         flash(f'Conta criada com sucesso no e-mail: {form_criarconta.email.data}', 'alert-success')
         # Redirecionando para a página inicial

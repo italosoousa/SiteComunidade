@@ -2,7 +2,7 @@ from comunidade import database
 from datetime import datetime
 
 # Tabela usuraios que herda de databasse.Model
-class Ususario(database.Model):
+class Usuario(database.Model):
   id = database.Column(database.Integer, primary_key=True)
   username = database.Column(database.String, nullable=False) # nullable == not null
   email = database.Column(database.String, nullable=False, unique=True) # unique, permite que tenha somente um e-mail
@@ -14,5 +14,5 @@ class Post(database.Model):
   id = database.Column(database.Integer, primary_key=True)
   titulo = database.Column(database.String, nullable=False)
   corpo = database.Column(database.Text, nullable=False) # String para texto pequenos e Text para textos grandes
-  data_criacao = database.Column(database.DateTime, nullabel=False, default=datetime.utcnow) # Coloca o horário em que foi criado
+  data_criacao = database.Column(database.DateTime, nullable=False, default=datetime.utcnow) # Coloca o horário em que foi criado
     
