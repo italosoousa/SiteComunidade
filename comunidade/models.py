@@ -1,4 +1,4 @@
-from main import database
+from comunidade import database
 from datetime import datetime
 
 # Tabela usuraios que herda de databasse.Model
