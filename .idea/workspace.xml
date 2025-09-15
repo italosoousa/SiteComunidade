@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40b462ee-535e-4794-a97e-2d0b85a771c8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/data_source_mapping.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comunidade/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/comunidade/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comunidade/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/comunidade/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/comunidade/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/comunidade/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/comunidade/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/comunidade/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instance/comunidade.db" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,6 +170,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SiteComunidade$teste.coverage" NAME="teste Coverage Results" MODIFIED="1757898923669" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/SiteComunidade$main.coverage" NAME="main Coverage Results" MODIFIED="1757941787748" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SiteComunidade$main.coverage" NAME="main Coverage Results" MODIFIED="1757943778962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
