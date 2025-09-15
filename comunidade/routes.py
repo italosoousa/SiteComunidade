@@ -33,7 +33,7 @@ def login():
         # Redirecionando para a página inicial
         return redirect(url_for('home'))
     # Valida se o usuário criou a conta     # Valida se estamos clicando no botão certo
-    if form_criarconta.validate_on_submit() and 'botao_submit_login' in request.form:
+    if form_criarconta.validate_on_submit() and 'botao_submit_criarconta' in request.form:
         # Criar um usuário 
         senha_cript = bcrypt.generate_password_hash(form_criarconta.senha.data)
         usuario = Usuario(username=form_criarconta.username.data, email=form_criarconta.email.data, senha=senha_cript)
