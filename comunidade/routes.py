@@ -2,7 +2,7 @@ from flask import render_template, request, flash, redirect, url_for
 from comunidade import app, database, bcrypt
 from comunidade.forms import FormLogin, FormCriarConta
 from comunidade.models import Usuario
-from flask_login import login_user
+from flask_login import login_user, logout_user, current_user
 
 # Rota da página inicial
 @app.route("/") # Esse é o caminho da página na qual eu quero alterar
@@ -50,10 +50,18 @@ def login():
         return redirect(url_for('home'))
     return render_template('login.html', form_criarconta=form_criarconta, form_login= form_login)
 
-app.route('/sair')
+@app.route('/sair')
 def sair():
-    pass
+    logout_user()
+    flash(f'Logout Feito com Sucesso', 'alert-success')
+    return redirect(url_for('home'))
 
-app.route('/perfil')
+
+@app.route('/perfil')
 def perfil():
-    pass
+    return render_template('perfil.html')
+
+
+@app.route('/post/criar')
+def criar_post():
+    return render_template('criarpost.html')
