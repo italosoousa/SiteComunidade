@@ -12,4 +12,3 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///comunidade.db'
 database = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
-from comunidade import routes
