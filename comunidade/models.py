@@ -1,5 +1,3 @@
-from sqlalchemy.testing.pickleable import User
-
 from comunidade import database, login_manager
 from datetime import datetime
 from flask_login import UserMixin
@@ -17,6 +15,11 @@ class Usuario(database.Model, UserMixin):
   email = database.Column(database.String, nullable=False, unique=True) # unique, permite que tenha somente um e-mail
   senha = database.Column(database.String, nullable=False)
   foto_perfil = database.Column(database.String, default='default.jpg')
+  posts = database.relationship('Post', backref='autor', lazy=True)
+  cursos = database.Column(database.String, nullable=False, default='Não Informado')
+
+  def contar_posts(self):
+      return len(self.posts)
 
 
 class Post(database.Model):
@@ -24,4 +27,4 @@ class Post(database.Model):
   titulo = database.Column(database.String, nullable=False)
   corpo = database.Column(database.Text, nullable=False) # String para texto pequenos e Text para textos grandes
   data_criacao = database.Column(database.DateTime, nullable=False, default=datetime.utcnow) # Coloca o horário em que foi criado
-    
+  id_usuario = database.Column(database.Integer, database.ForeignKey('usuario.id'), nullable=False)  

@@ -12,8 +12,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///comunidade.db'
 
 database = SQLAlchemy(app) # banco de dados
 bcrypt = Bcrypt(app) # crypto da senha
-login_manager = LoginManager(app) 
-login_manager.login_view = 'login'
+login_manager = LoginManager(app) # faz as validações dos logins
+login_manager.login_view = 'login' 
 login_manager.login_message_category = 'alert-info'
 
 from comunidade import routes

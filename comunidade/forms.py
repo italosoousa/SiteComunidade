@@ -1,28 +1,51 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from flask_wtf.file import FileField, FileAllowed
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from comunidade.models import Usuario
+from flask_login import current_user
 
-# É preciso deginir o FlaskForm dentro da classe não ter que declarar o __init__
+# Form de criação de conta
 class FormCriarConta(FlaskForm):
-  username = StringField('Nome de usuário', validators=[DataRequired()])
-  email = StringField('E-mail', validators=[DataRequired(), Email()])
-  senha = PasswordField('Senha', validators=[DataRequired(), Length(6, 20)])
-  confirmar_senha = PasswordField('Confirmação de senha', validators=[DataRequired(), EqualTo('senha')])
-  botao_submit_criarconta = SubmitField('Criar conta')
+    username = StringField('Nome de Usuário', validators=[DataRequired()])
+    email = StringField('E-mail', validators=[DataRequired(), Email()])
+    senha = PasswordField('Senha', validators=[DataRequired(), Length(6, 20)])
+    confirmacao_senha = PasswordField('Confirmação da Senha', validators=[DataRequired(), EqualTo('senha')])
+    botao_submit_criarconta = SubmitField('Criar Conta')
 
-  def validate_email(self, email):
-      usuario = Usuario.query.filter_by(email=email.data).first()
-      if usuario:
-          raise ValidationError('E-mail já cadastrado. Cadastre-se com outro e-mail ou faça um login para continuar')
+    def validate_email(self, email):
+        usuario = Usuario.query.filter_by(email=email.data).first()
+        if usuario:
+            raise ValidationError('E-mail já cadastrado. Cadastre-se com outro e-mail ou faça login para continuar')
 
-  def validate_username(self, username):
-      usuario = Usuario.query.filter_by(email=username.data).first()
-      if usuario:
-          raise ValidationError('Usuário já cadastrado. Cadastre-se com outro usuário ou faça um login para continuar')
-
+# Form de login 
 class FormLogin(FlaskForm):
-  email = StringField('E-mail', validators=[DataRequired(), Email()])
-  senha = PasswordField('Senha', validators=[DataRequired(), Length(6, 20)])
-  lembrar_dados = BooleanField('Lembrar dados de acesso')
-  botao_submit_login = SubmitField('Criar conta')
+    email = StringField('E-mail', validators=[DataRequired(), Email()])
+    senha = PasswordField('Senha', validators=[DataRequired(), Length(6, 20)])
+    lembrar_dados = BooleanField('Lembrar Dados de Acesso')
+    botao_submit_login = SubmitField('Fazer Login')
+
+# Form de ediçãio de login
+class FormEditarPerfil(FlaskForm):
+    username = StringField('Nome de Usuário', validators=[DataRequired()])
+    email = StringField('E-mail', validators=[DataRequired(), Email()])
+    foto_perfil = FileField('Atualizar Foto de Perfil', validators=[FileAllowed(['jpg', 'png'])])
+    curso_excel = BooleanField('Excel Impressionador')
+    curso_vba = BooleanField('VBA Impressionador')
+    curso_powerbi = BooleanField('Power BI Impressionador')
+    curso_python = BooleanField('Python Impressionador')
+    curso_ppt = BooleanField('Apresentações Impressionadoras')
+    curso_sql = BooleanField('SQL Impressionador')
+    botao_submit_editarperfil = SubmitField('Confirmar Edição')
+
+    def validate_email(self, email):
+        if current_user.email != email.data:
+            usuario = Usuario.query.filter_by(email=email.data).first()
+            if usuario:
+                raise ValidationError('Já existe um usuário com esse e-mail. Cadastre outro e-mail')
+
+# Form de criação de post
+class FormCriarPost(FlaskForm):
+    titulo = StringField('Título do Post', validators=[DataRequired(), Length(2, 140)])
+    corpo = TextAreaField('Escreva seu Post Aqui', validators=[DataRequired()])
+    botao_submit = SubmitField('Criar Post')
