@@ -2,7 +2,7 @@ from flask import render_template, request, flash, redirect, url_for
 from comunidade import app, database, bcrypt
 from comunidade.forms import FormLogin, FormCriarConta
 from comunidade.models import Usuario
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, login_required
 
 # Rota da página inicial
 @app.route("/") # Esse é o caminho da página na qual eu quero alterar
@@ -16,6 +16,7 @@ def contato():
 
 # Rota para a página de usuários
 @app.route('/usuarios')
+@login_required
 def usuarios():
     lista_usuarios = ['Italo', 'Bruna', 'Carlos', 'Ana']
     return render_template('usuarios.html', lista_usuarios=lista_usuarios)
@@ -50,18 +51,22 @@ def login():
         return redirect(url_for('home'))
     return render_template('login.html', form_criarconta=form_criarconta, form_login= form_login)
 
+# Rota para o botão de sair
 @app.route('/sair')
+@login_required # Limita a página para usuários logados
 def sair():
     logout_user()
     flash(f'Logout Feito com Sucesso', 'alert-success')
     return redirect(url_for('home'))
 
-
+# Rota para a página do perfil
 @app.route('/perfil')
+@login_required
 def perfil():
     return render_template('perfil.html')
 
-
+# Rota para a página de criação de post
 @app.route('/post/criar')
+@login_required
 def criar_post():
     return render_template('criarpost.html')
